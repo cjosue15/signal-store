@@ -1,0 +1,32 @@
+<div class="mx-auto max-w-screen-xl">
+  @switch (productsState.state.status()) {
+    @case ("loading") {
+      <p>Loading...</p>
+    }
+    @case ("error") {
+      <p>Error</p>
+    }
+
+    @default {
+      <div class="flex justify-end my-6">
+        <button
+          type="button"
+          (click)="changePage()"
+          class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Cambiar pagina
+        </button>
+      </div>
+
+      <div class="grid grid-cols-[repeat(4,300px)] gap-6">
+        @for (product of productsState.state().products; track product) {
+          <app-product-card
+            class="block"
+            [product]="product"
+            (addToCart)="addToCart($event)"
+          />
+        }
+      </div>
+    }
+  }
+</div>
